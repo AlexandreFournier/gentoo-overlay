@@ -1,13 +1,11 @@
 EAPI=5
 
-inherit 
-
 DESCRIPTION="Osmocom software defined radio TETRA receiver"
 HOMEPAGE="http://tetra.osmocom.org/"
 
 if [[ ${PV} == 9999* ]]; then
 	inherit git-2
-	EGIT_REPO_URI="git clone git://git.osmocom.org/osmo-tetra.git"
+	EGIT_REPO_URI="git://git.osmocom.org/osmo-tetra.git"
 	EGIT_SOURCEDIR="${WORKDIR}/${PN}"
 	EGIT_MASTER="gr3.7"
 	KEYWORDS=""
@@ -20,8 +18,10 @@ LICENSE="GPL"
 SLOT="0"
 
 RDEPEND="
+	net-wireless/gnuradio[wxwidgets]
 	net-libs/libosmocore
 	net-wireless/gr-osmosdr
+	!net-wireless/osmo-tetra-sq5bpf
 "
 
 DEPEND="${RDEPEND}"
