@@ -16,12 +16,10 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS=""
 	inherit git-r3
 	DEPEND="=media-libs/mbelib-9999"
-
 else
 	SRC_URI="https://github.com/szechyjs/dsd/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
-
 
 DEPEND="${DEPEND}
 	>=sci-libs/itpp-4.3.1
