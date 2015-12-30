@@ -25,13 +25,13 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0/${PV}"
-IUSE="bladerf fcd fcdpp hackrf iqbalance mirisdr python rtlsdr uhd"
+IUSE="airspy bladerf fcd fcdpp hackrf iqbalance mirisdr python rtlsdr uhd"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-libs/boost:=
 	>=net-wireless/gnuradio-3.7_rc:0=[fcd?,${PYTHON_USEDEP}]
-	fcdpp? ( net-wireless/gr-fcdproplus:= )
 	bladerf? ( net-wireless/bladerf:= )
+	fcdpp? ( net-wireless/gr-fcdproplus:= )
 	hackrf? ( net-libs/libhackrf:= )
 	iqbalance? ( net-wireless/gr-iqbal:=[${PYTHON_USEDEP}] )
 	mirisdr? ( net-libs/libmirisdr:= )
@@ -52,6 +52,7 @@ src_configure() {
 		-DENABLE_DEFAULT=OFF
 		-DPYTHON_EXECUTABLE="${PYTHON}"
 		-DENABLE_FILE=ON
+		$(cmake-utils_use_enable airspy)
 		$(cmake-utils_use_enable bladerf)
 		$(cmake-utils_use_enable fcd)
 		$(cmake-utils_use_enable fcdpp)
