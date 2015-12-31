@@ -30,6 +30,7 @@ IUSE="airspy bladerf fcd fcdpp hackrf iqbalance mirisdr python rtlsdr uhd"
 RDEPEND="${PYTHON_DEPS}
 	dev-libs/boost:=
 	>=net-wireless/gnuradio-3.7_rc:0=[fcd?,${PYTHON_USEDEP}]
+	airspy? ( net-wireless/airspy-host:= )
 	bladerf? ( net-wireless/bladerf:= )
 	fcdpp? ( net-wireless/gr-fcdproplus:= )
 	hackrf? ( net-libs/libhackrf:= )
