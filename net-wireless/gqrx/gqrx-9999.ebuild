@@ -34,6 +34,7 @@ DEPEND=">=net-wireless/gnuradio-3.7_rc:=[audio,analog,filter]
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
 		dev-qt/qtsvg:5
+		dev-qt/qtnetwork:5
 	)
 	pulseaudio? ( media-sound/pulseaudio:= )"
 
