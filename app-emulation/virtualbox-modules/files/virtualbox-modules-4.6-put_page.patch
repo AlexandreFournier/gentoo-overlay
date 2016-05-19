@@ -1,0 +1,52 @@
+diff -rua vbox-kernel-module-src-4.3.32.old/vboxdrv/r0drv/linux/memobj-r0drv-linux.c vbox-kernel-module-src-4.3.32.new/vboxdrv/r0drv/linux/memobj-r0drv-linux.c
+--- vbox-kernel-module-src-4.3.32.old/vboxdrv/r0drv/linux/memobj-r0drv-linux.c	2015-10-13 16:27:18.000000000 +0200
++++ vbox-kernel-module-src-4.3.32.new/vboxdrv/r0drv/linux/memobj-r0drv-linux.c	2016-05-19 23:38:17.426754301 +0200
+@@ -578,7 +578,11 @@
+                 {
+                     if (!PageReserved(pMemLnx->apPages[iPage]))
+                         SetPageDirty(pMemLnx->apPages[iPage]);
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 6, 0)
++                    put_page(pMemLnx->apPages[iPage]);
++#else
+                     page_cache_release(pMemLnx->apPages[iPage]);
++#endif
+                 }
+ 
+                 if (pTask && pTask->mm)
+@@ -1029,6 +1033,16 @@
+         /*
+          * Get user pages.
+          */
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 6, 0)
++        rc = get_user_pages_remote(pTask,                  /* Task for fault accounting. */
++                                   pTask->mm,              /* Whose pages. */
++                                   R3Ptr,                  /* Where from. */
++                                   cPages,                 /* How many pages. */
++                                   fWrite,                 /* Write to memory. */
++                                   fWrite,                 /* force write access. */
++                                   &pMemLnx->apPages[0],   /* Page array. */
++                                   papVMAs);               /* vmas */
++#else
+         rc = get_user_pages(pTask,                  /* Task for fault accounting. */
+                             pTask->mm,              /* Whose pages. */
+                             R3Ptr,                  /* Where from. */
+@@ -1037,6 +1051,7 @@
+                             fWrite,                 /* force write access. */
+                             &pMemLnx->apPages[0],   /* Page array. */
+                             papVMAs);               /* vmas */
++#endif
+         if (rc == cPages)
+         {
+             /*
+@@ -1081,7 +1096,11 @@
+         {
+             if (!PageReserved(pMemLnx->apPages[rc]))
+                 SetPageDirty(pMemLnx->apPages[rc]);
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 6, 0)
++            put_page(pMemLnx->apPages[rc]);
++#else
+             page_cache_release(pMemLnx->apPages[rc]);
++#endif
+         }
+ 
+         up_read(&pTask->mm->mmap_sem);
