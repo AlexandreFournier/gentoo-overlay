@@ -115,11 +115,11 @@ src_configure() {
 		--localstatedir="/var" \
 		--with-crypto \
 		--with-gsm=internal \
+		--with-pjproject-bundled \
 		--with-popt \
 		--with-ssl \
 		--with-z \
 		--without-pwlib \
-		--without-pjproject \
 		$(use_with caps cap) \
 		$(use_with http gmime) \
 		$(use_with newt) \
