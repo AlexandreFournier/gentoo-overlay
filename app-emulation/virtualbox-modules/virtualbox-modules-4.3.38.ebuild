@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -44,7 +44,8 @@ src_prepare() {
 		epatch "${FILESDIR}"/${PN}-4.1.4-pax-const.patch
 	fi
 	
-	epatch "${FILESDIR}"/${PN}-4.6-put_page.patch
+	epatch "${FILESDIR}"/${PN}-4.3.38-mod_timer.patch
+	epatch "${FILESDIR}"/${PN}-4.3.38-vboxnetadp-linux.patch
 }
 
 src_install() {
