@@ -12,3 +12,12 @@ masters = gentoo
 auto-sync = yes
 ```
 
+You can also use layman if you prefer:
+
+```
+emerge layman
+echo source /var/lib/layman/make.conf >> /etc/portage/make.conf
+layman -f
+layman -a AlexandreFournier
+```
+
