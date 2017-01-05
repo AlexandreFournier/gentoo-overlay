@@ -46,6 +46,7 @@ src_prepare() {
 	
 	epatch "${FILESDIR}"/${PN}-4.3.38-mod_timer.patch
 	epatch "${FILESDIR}"/${PN}-4.3.38-vboxnetadp-linux.patch
+	epatch "${FILESDIR}"/${PN}-4.3.38-vboxdrv-linux-4.9.0.patch
 }
 
 src_install() {
