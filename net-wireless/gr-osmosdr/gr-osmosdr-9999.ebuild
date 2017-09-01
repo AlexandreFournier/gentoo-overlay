@@ -1,6 +1,5 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -25,10 +24,10 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0/${PV}"
-IUSE="airspy bladerf fcd fcdpp hackrf iqbalance mirisdr python rtlsdr uhd"
+IUSE="airspy bladerf fcd fcdpp hackrf iqbalance mirisdr python rtlsdr sdrplay uhd"
 
 RDEPEND="${PYTHON_DEPS}
-	dev-libs/boost:=
+	dev-libs/boost
 	>=net-wireless/gnuradio-3.7_rc:0=[fcd?,${PYTHON_USEDEP}]
 	airspy? ( net-wireless/airspy-host:= )
 	bladerf? ( net-wireless/bladerf:= )
@@ -37,6 +36,7 @@ RDEPEND="${PYTHON_DEPS}
 	iqbalance? ( net-wireless/gr-iqbal:=[${PYTHON_USEDEP}] )
 	mirisdr? ( net-libs/libmirisdr:= )
 	rtlsdr? ( >=net-wireless/rtl-sdr-0.5.3:= )
+	sdrplay? ( net-libs/libsdrplay:= )
 	uhd? ( net-wireless/uhd:=[${PYTHON_USEDEP}] )"
 DEPEND="${RDEPEND}
 	dev-python/cheetah"
@@ -63,6 +63,8 @@ src_configure() {
 		$(cmake-utils_use_enable python)
 		$(cmake-utils_use_enable rtlsdr RTL)
 		$(cmake-utils_use_enable rtlsdr RTL_TCP)
+		$(cmake-utils_use_enable sdrplay)
+		$(cmake-utils_use_enable sdrplay NONFREE)
 		$(cmake-utils_use_enable uhd)
 	)
 
@@ -71,5 +73,7 @@ src_configure() {
 
 src_install() {
 	cmake-utils_src_install
-	python_fix_shebang "${ED}"/usr/bin
+	if use python; then
+		python_fix_shebang "${ED}"/usr/bin
+	fi
 }
