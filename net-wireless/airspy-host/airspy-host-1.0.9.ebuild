@@ -9,7 +9,7 @@ inherit cmake-utils udev
 DESCRIPTION="Usemode driver and associated tools for airspy"
 HOMEPAGE="http://www.airspy.com"
 SRC_URI="https://github.com/airspy/host/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/host-${PV}"
+S="${WORKDIR}/airspyone_host-${PV}"
 
 if [[ ${PV} == 9999* ]]; then
 	inherit git-r3
