@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
+PYTHON_COMPAT=( python2_7 )
 
-inherit cmake-utils
+inherit cmake-utils python-single-r1
 
 DESCRIPTION="GNU radio Funcube Dongle Pro+ source"
 HOMEPAGE="https://github.com/dl1ksv/gr-fcdproplus"
@@ -26,8 +26,11 @@ IUSE=""
 
 DEPEND="
 	>=net-wireless/gnuradio-3.7[audio]
+	${PYTHON_DEPS}
 "
 RDEPEND="${DEPEND}"
+
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_configure() {
 	local mycmakeargs=(
