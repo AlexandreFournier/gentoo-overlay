@@ -1,6 +1,6 @@
 EAPI=5
-
-inherit cmake-utils
+PYTHON_COMPAT=( python2_7 )
+inherit python-single-r1 cmake-utils git-2
 
 DESCRIPTION="GNURadio Iridium Out Of Tree Module"
 HOMEPAGE="https://github.com/muccc/gr-iridium.git"
@@ -18,9 +18,11 @@ fi
 LICENSE="GPL"
 SLOT="0"
 
-RDEPEND="
+DEPEND="
 	>=net-wireless/gnuradio-3.7
+	${PYTHON_DEPS}
 "
 
-DEPEND="${RDEPEND}"
+RDEPEND="${DEPEND}"
 
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
