@@ -33,8 +33,8 @@ src_compile() {
 
 src_install() {
 	exeinto /usr/bin
-	doexe ${SRC}/demod/python3.7/tetra-demod.py || die
-	doexe ${SRC}/demod/python3.7/simdemod2.py || die
+	doexe ${SRC}/demod/python-3.7/tetra-demod.py || die
+	doexe ${SRC}/demod/python-3.7/simdemod2.py || die
 	doexe ${SRC}/float_to_bits || die
 	doexe ${SRC}/tetra-rx || die
 }
