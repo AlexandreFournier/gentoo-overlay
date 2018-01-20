@@ -22,17 +22,28 @@ fi
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE=""
+IUSE="+udev"
 
 DEPEND="virtual/udev"
 RDEPEND="${DEPEND}"
 
 src_configure() {
+	local mycmakeargs=(
+		-DINSTALL_UDEV_RULES=$(usex udev)
+	)
 	cmake-utils_src_configure
 }
 
 src_install() {
 	cmake-utils_src_install
-	udev_newrules "${S}/airspy-tools/52-airspy.rules" 52-airspy.rules
+
+    if use udev; then
+		udev_newrules "${D}etc/udev/rules.d/52-airspy.rules" 52-airspy.rules
+		rm -rf "${D}etc"
+	fi
+}
+
+pkg_postinst() {
+    use udev && udev_reload
 }
 
