@@ -17,11 +17,11 @@ if [[ ${PV} == 9999* ]]; then
 else
 	SRC_URI="https://github.com/airspy/host/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/airspyone_host-${PV}"
+	KEYWORDS="amd64 x86"
 fi
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="amd64 x86"
 IUSE=""
 
 DEPEND="virtual/udev"
