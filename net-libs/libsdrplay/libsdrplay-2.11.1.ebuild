@@ -25,11 +25,11 @@ src_unpack() {
 }
 
 src_compile() {
-	# ln -s libmirsdrapi-rsp.so.2.10 i686/libmirsdrapi-rsp.so || die
-	# ln -s libmirsdrapi-rsp.so.2.10 i686/libmirsdrapi-rsp.so.2 || die
+	# ln -s libmirsdrapi-rsp.so.2.11 i686/libmirsdrapi-rsp.so || die
+	# ln -s libmirsdrapi-rsp.so.2.11 i686/libmirsdrapi-rsp.so.2 || die
 
-	ln -s libmirsdrapi-rsp.so.2.10 x86_64/libmirsdrapi-rsp.so || die
-	ln -s libmirsdrapi-rsp.so.2.10 x86_64/libmirsdrapi-rsp.so.2 || die
+	ln -s libmirsdrapi-rsp.so.2.11 x86_64/libmirsdrapi-rsp.so || die
+	ln -s libmirsdrapi-rsp.so.2.11 x86_64/libmirsdrapi-rsp.so.2 || die
 }
 
 src_install() {
@@ -40,7 +40,7 @@ src_install() {
 	# echo dolib.so i686/libmirsdrapi-rsp.so.2
 	# echo dolib.so i686/libmirsdrapi-rsp.so
 
-	dolib.so x86_64/libmirsdrapi-rsp.so.2.10
+	dolib.so x86_64/libmirsdrapi-rsp.so.2.11
 	dolib.so x86_64/libmirsdrapi-rsp.so.2
 	dolib.so x86_64/libmirsdrapi-rsp.so
 
