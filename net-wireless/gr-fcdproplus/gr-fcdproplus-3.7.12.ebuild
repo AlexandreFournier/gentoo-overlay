@@ -13,15 +13,15 @@ if [[ ${PV} == 9999* ]]; then
 	inherit git-2
 	EGIT_REPO_URI="https://github.com/dl1ksv/gr-fcdproplus.git"
 	EGIT_SOURCEDIR="${WORKDIR}/${PN}"
-	KEYWORDS=""
 	S="${WORKDIR}/${PN}"
+	KEYWORDS="~amd64"
 else
-	die "This software does not provide source package yet :("
+	SRC_URI="https://github.com/dl1ksv/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~amd64"
 fi
 
-LICENSE="GPL"
+LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="
