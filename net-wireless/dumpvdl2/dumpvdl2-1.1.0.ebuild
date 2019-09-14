@@ -15,7 +15,7 @@ IUSE="rtlsdr mirisdr sdrplay"
 DEPEND="
     rtlsdr? ( net-wireless/rtl-sdr )
     mirisdr? ( net-libs/libmirisdr )
-    sdrplay? ( net-libs/libsdrplay )
+    sdrplay? ( net-wireless/sdrplay )
 "
 RDEPEND="${DEPEND}"
 
