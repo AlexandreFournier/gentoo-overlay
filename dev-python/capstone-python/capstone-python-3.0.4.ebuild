@@ -5,7 +5,7 @@
 EAPI=5
 
 MY_P=capstone-"${PV}"
-PYTHON_COMPAT=( python{2_7,3_4} )
+PYTHON_COMPAT=( python{2_7,3_6,3_7,3_8} )
 inherit eutils multilib distutils-r1
 
 DESCRIPTION="A lightweight multi-platform, multi-architecture disassembly framework"
@@ -13,7 +13,7 @@ HOMEPAGE="http://www.capstone-engine.org/"
 SRC_URI="https://github.com/aquynh/capstone/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="x86 amd64 ~arm"
 IUSE="cython"
 
 RDEPEND="cython? ( dev-python/cython )
