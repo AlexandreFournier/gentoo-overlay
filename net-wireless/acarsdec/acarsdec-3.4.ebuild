@@ -5,8 +5,8 @@
 EAPI=5
 
 DESCRIPTION="An open source Acars decoder with rtl_sdr frontend"
-HOMEPAGE="http://sourceforge.net/projects/acarsdec/"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
+HOMEPAGE="https://github.com/TLeconte/acarsdec"
+SRC_URI="https://github.com/TLeconte/${PN}/archive/${P}.tar.gz"
 
 LICENSE="GPLv2"
 SLOT="0"
