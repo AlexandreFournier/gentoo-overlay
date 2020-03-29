@@ -9,7 +9,7 @@ inherit distutils-r1
 PY_PN=ovh
 PY_P=${PY_PN}-${PV}
 
-DESCRIPTION="Lightweight wrapper around OVH’s APIs"
+DESCRIPTION="Lightweight wrapper around OVH's APIs"
 HOMEPAGE="http://api.ovh.com/"
 SRC_URI="mirror://pypi/${PY_PN:0:1}/${PY_PN}/${PY_P}.tar.gz -> ${P}.tar.gz"
 
