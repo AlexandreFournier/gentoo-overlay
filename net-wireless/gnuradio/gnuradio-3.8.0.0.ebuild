@@ -44,21 +44,25 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 "
 
 RDEPEND="${PYTHON_DEPS}
+	$(python_gen_cond_dep '
+		>=dev-libs/boost-1.53[python,${PYTHON_MULTI_USEDEP}]
+		dev-python/six[${PYTHON_MULTI_USEDEP}]
+	')
 	>=dev-lang/orc-0.4.12
-	$(python_gen_cond_dep 'dev-libs/boost:0=[python,${PYTHON_MULTI_USEDEP}]')
 	dev-libs/log4cpp
-	$(python_gen_cond_dep 'dev-python/six[${PYTHON_MULTI_USEDEP}]')
-	sci-libs/fftw:3.0=
-	sci-libs/mpir
-	alsa? ( media-libs/alsa-lib:= )
+	sci-libs/fftw:3.0
+	>=sci-libs/mpir-3.0.0
+	alsa? ( media-libs/alsa-lib )
 	fec? (
-		sci-libs/gsl
-		sci-libs/scipy
+		>=sci-libs/gsl-1.10
+		$(python_gen_cond_dep 'sci-libs/scipy[${PYTHON_MULTI_USEDEP}]')
 	)
-	filter? ( sci-libs/scipy )
+	filter? (
+		$(python_gen_cond_dep 'sci-libs/scipy[${PYTHON_MULTI_USEDEP}]')
+	)
 	grc? (
 		$(python_gen_cond_dep '
-			dev-python/mako[${PYTHON_MULTI_USEDEP}]
+			>=dev-python/mako-0.4.2[${PYTHON_MULTI_USEDEP}]
 			dev-python/numpy[${PYTHON_MULTI_USEDEP}]
 			dev-python/pygobject:3[${PYTHON_MULTI_USEDEP}]
 			dev-python/pyyaml[${PYTHON_MULTI_USEDEP}]
@@ -76,7 +80,9 @@ RDEPEND="${PYTHON_DEPS}
 		dev-qt/qtwidgets:5
 	)
 	sdl? ( >=media-libs/libsdl-1.2.0 )
-	trellis? ( sci-libs/scipy )
+	trellis? (
+		$(python_gen_cond_dep 'sci-libs/scipy[${PYTHON_MULTI_USEDEP}]')
+	)
 	uhd? (
 		$(python_gen_cond_dep '>=net-wireless/uhd-3.9.6:=[${PYTHON_SINGLE_USEDEP}]' python2_7)
 	)
@@ -98,7 +104,7 @@ RDEPEND="${PYTHON_DEPS}
 
 DEPEND="${RDEPEND}
 	app-text/docbook-xml-dtd:4.2
-	>=dev-lang/swig-3.0.5
+	>=dev-lang/swig-3.0.8
 	virtual/pkgconfig
 	doc? (
 		>=app-doc/doxygen-1.5.7.1
