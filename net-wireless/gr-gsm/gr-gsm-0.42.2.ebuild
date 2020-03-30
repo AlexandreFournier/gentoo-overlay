@@ -14,7 +14,6 @@ if [[ ${PV} == 9999* ]]; then
 	inherit git-r3
 	SRC_URI=""
 	EGIT_REPO_URI="https://github.com/osmocom/gr-gsm.git"
-	EGIT_BRANCH="porting_to_gr38"
 	KEYWORDS=""
 else
 	SRC_URI="https://github.com/osmocom/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
@@ -36,6 +35,8 @@ DEPEND="${RDEPEND}
 	dev-lang/swig"
 
 src_prepare() {
+	epatch "${FILESDIR}/${P}-gnuradio-3.8.patch"
+
 	sed -i "s|gr-grgsm|gr-gsm|g" CMakeLists.txt
 #fixme below
 	sed -i "s|\${GR_DOC_DIR}\/\${CMAKE_PROJECT_NAME}|${EPREFIX}/usr/share/doc/${PF}|g" CMakeLists.txt
