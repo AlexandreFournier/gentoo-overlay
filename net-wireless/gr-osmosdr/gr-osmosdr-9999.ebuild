@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python2_7 python3_6 python3_7 )
 
 inherit cmake-utils python-single-r1
 
@@ -25,25 +25,28 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0/${PV}"
-IUSE="airspy bladerf fcd fcdpp hackrf iqbalance mirisdr python rtlsdr soapy sdrplay uhd"
+IUSE="airspy bladerf fcd -fcdpp hackrf iqbalance mirisdr python rtlsdr soapy sdrplay uhd"
+
+REQUIRED_USE="${PYTHON_REQUIRED_USE}
+	uhd? ( $(python_gen_useflags 'python2_7') )
+"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-libs/boost:=
-	>=net-wireless/gnuradio-3.7_rc:0=[fcd?,${PYTHON_USEDEP}]
+	>=net-wireless/gnuradio-3.8.0.0[${PYTHON_SINGLE_USEDEP}]
 	airspy? ( net-wireless/airspy-host:= )
 	bladerf? ( net-wireless/bladerf:= )
-	fcdpp? ( net-wireless/gr-fcdproplus:= )
+	fcdpp? ( net-wireless/gr-fcdproplus:=[${PYTHON_SINGLE_USEDEP}] )
 	hackrf? ( net-libs/libhackrf:= )
-	iqbalance? ( net-wireless/gr-iqbal:=[${PYTHON_USEDEP}] )
+	iqbalance? ( net-wireless/gr-iqbal:=[${PYTHON_SINGLE_USEDEP}] )
 	mirisdr? ( net-libs/libmirisdr:= )
 	rtlsdr? ( >=net-wireless/rtl-sdr-0.5.4:= )
 	sdrplay? ( net-wireless/sdrplay )
 	soapy? ( net-wireless/soapysdr:= )
-	uhd? ( net-wireless/uhd:=[${PYTHON_USEDEP}] )"
-DEPEND="${RDEPEND}
-	dev-python/cheetah"
+	uhd? ( net-wireless/uhd:=[${PYTHON_SINGLE_USEDEP}] )"
 
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+DEPEND="${RDEPEND}
+	$(python_gen_useflags 'python2*')? ( dev-python/cheetah )"
 
 src_prepare() {
 	epatch "${FILESDIR}/${P}-fix-fcdpp-support.diff"
