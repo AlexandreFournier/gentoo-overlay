@@ -38,7 +38,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	modtool? ( utils )
 	qt5? ( filter )
 	trellis? ( analog digital )
-	uhd? ( filter analog $(python_gen_useflags 'python2_7') )
+	uhd? ( filter analog )
 	vocoder? ( filter analog )
 	wavelet? ( analog )
 "
@@ -84,7 +84,7 @@ RDEPEND="${PYTHON_DEPS}
 		$(python_gen_cond_dep 'sci-libs/scipy[${PYTHON_MULTI_USEDEP}]')
 	)
 	uhd? (
-		$(python_gen_cond_dep '>=net-wireless/uhd-3.9.6:=[${PYTHON_SINGLE_USEDEP}]' python2_7)
+		$(python_gen_cond_dep '>=net-wireless/uhd-3.9.6:=[${PYTHON_SINGLE_USEDEP}]')
 	)
 	utils? (
 		$(python_gen_cond_dep '
@@ -136,8 +136,9 @@ src_configure() {
 		-DENABLE_VOLK=ON
 		-DENABLE_PYTHON=ON
 		-DENABLE_GR_BLOCKS=ON
+		-DENABLE_GR_CTRLPORT=ON
 		-DENABLE_GR_FFT=ON
-		-DENABLE_GR_AUDIO=ON
+		-DENABLE_GR_AUDIO="$(usex audio)"
 		-DENABLE_GR_ANALOG="$(usex analog)"
 		-DENABLE_GR_CHANNELS="$(usex channels)"
 		-DENABLE_GR_DIGITAL="$(usex digital)"
@@ -174,12 +175,12 @@ src_install() {
 		mv "${ED}"/usr/share/${PN}/examples "${ED}"/usr/share/doc/${PF}/ || die
 		docompress -x /usr/share/doc/${PF}/examples
 	else
-	# It seems that the examples are always installed
+		# It seems that the examples are always installed
 		rm -rf "${ED}"/usr/share/${PN}/examples || die
 	fi
 
 	if use doc || use examples; then
-		#this doesn't appear useful
+		# This doesn't appear useful
 		rm -rf "${ED}"/usr/share/doc/${PF}/xml || die
 	fi
 
