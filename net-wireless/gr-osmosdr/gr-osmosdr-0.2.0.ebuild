@@ -23,9 +23,7 @@ LICENSE="GPL-3"
 SLOT="0/${PV}"
 IUSE="airspy bladerf fcd -fcdpp hackrf iqbalance mirisdr python rtlsdr soapy sdrplay uhd"
 
-REQUIRED_USE="${PYTHON_REQUIRED_USE}
-	uhd? ( $(python_gen_useflags 'python2_7') )
-"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-libs/boost:=
