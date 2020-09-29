@@ -60,10 +60,10 @@ RDEPEND="${PYTHON_DEPS}
 	alsa? ( media-libs/alsa-lib )
 	fec? (
 		>=sci-libs/gsl-1.10
-		$(python_gen_cond_dep 'sci-libs/scipy[${PYTHON_MULTI_USEDEP}]')
+		$(python_gen_cond_dep 'dev-python/scipy[${PYTHON_MULTI_USEDEP}]')
 	)
 	filter? (
-		$(python_gen_cond_dep 'sci-libs/scipy[${PYTHON_MULTI_USEDEP}]')
+		$(python_gen_cond_dep 'dev-python/scipy[${PYTHON_MULTI_USEDEP}]')
 	)
 	grc? (
 		$(python_gen_cond_dep '
@@ -86,7 +86,7 @@ RDEPEND="${PYTHON_DEPS}
 	)
 	sdl? ( >=media-libs/libsdl-1.2.0 )
 	trellis? (
-		$(python_gen_cond_dep 'sci-libs/scipy[${PYTHON_MULTI_USEDEP}]')
+		$(python_gen_cond_dep 'dev-python/scipy[${PYTHON_MULTI_USEDEP}]')
 	)
 	uhd? (
 		$(python_gen_cond_dep '>=net-wireless/uhd-3.9.6:=[${PYTHON_SINGLE_USEDEP}]')
