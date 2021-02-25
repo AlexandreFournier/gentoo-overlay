@@ -13,13 +13,13 @@ SLOT="0"
 if [ "${PV}" = "9999" ]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/alfredh/baresip.git"
-	KEYWORDS=""
+	KEYWORDS="~adm64 ~x86"
 else
-	SRC_URI="https://github.com/alfredh/${PN}/releases/download/v${PV}/${P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
+	SRC_URI="https://github.com/baresip/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="amd64 ~x86"
 fi
 
-IUSE="alsa amr avahi cairo codec2 +cons evdev ffmpeg +g711 g722 g7221 g726 gsm gstaudio gstvideo gtk h265 ilbc isac jack +l16 libnotify mpa mpg123 mqtt opus opus-ms oss plc portaudio pulseaudio rtcp-summary sdl2 sndfile speex srtp +stdio syslog v4l2 x11 vpx"
+IUSE="alsa amr avahi cairo codec2 +cons evdev ffmpeg +g711 g722 g7221 g726 gsm gstaudio gstvideo gtk h265 ilbc isac jack +l16 libnotify mpa mpg123 mqtt openssl opus opus-ms oss plc portaudio pulseaudio rtcp-summary sdl2 sndfile speex srtp +stdio syslog v4l2 x11 vpx"
 
 REQUIRED_USE="
 	libnotify? ( gtk )
@@ -60,6 +60,7 @@ DEPEND="
 	)
 	mpg123? ( media-sound/mpg123 )
 	mqtt? ( app-misc/mosquitto )
+	openssl? ( dev-libs/openssl:0= )
 	opus? ( media-libs/opus )
 	opus-ms? ( media-libs/opus )
 	oss? ( media-libs/alsa-oss )
@@ -89,8 +90,6 @@ src_configure() {
 	#export USE_OMX_RPI=
 	#export USE_OMX_BELLAGIO=
 
-	export EXTRA_MODULES=dtmfio
-
 	use alsa         && export USE_ALSA=yes
 	use amr          && export USE_AMR=yes
 	use avahi        && export USE_AVAHI=yes
@@ -116,6 +115,8 @@ src_configure() {
 	use mpa          && export USE_MPA=yes
 	use mpg123       && export USE_MPG123=yes
 	use mqtt         && export USE_MQTT=yes
+	use openssl      && export USE_DTLS=yes
+	use openssl      && export USE_DTLS_SRTP=yes
 	use opus         && export USE_OPUS=yes
 	use opus-ms      && export USE_OPUS_MS=yes
 	use oss          && export USE_OSS=yes
