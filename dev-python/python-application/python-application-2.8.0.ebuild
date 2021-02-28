@@ -1,9 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI="7"
 
-PYTHON_COMPAT=( python2_7 python3_4 )
+PYTHON_COMPAT=( python3_{7,8,9} )
 
 inherit distutils-r1
 
@@ -15,4 +15,4 @@ LICENSE="LGPL-2"
 SLOT="0"
 IUSE=""
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
