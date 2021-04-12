@@ -1,8 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: blshkv$
 
-EAPI=5
+EAPI=7
 
 MY_P=capstone-"${PV}"
 PYTHON_COMPAT=( python{2_7,3_6,3_7,3_8} )
