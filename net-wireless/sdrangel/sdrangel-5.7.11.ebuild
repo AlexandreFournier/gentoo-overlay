@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="SDR Rx/Tx software"
 HOMEPAGE="https://github.com/f4exb/sdrangel"
@@ -80,5 +80,5 @@ src_configure() {
 		-DENABLE_SOAPYSDR="$(usex soapy)" \
 		-DENABLE_XTRX=OFF \
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }

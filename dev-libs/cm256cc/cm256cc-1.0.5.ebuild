@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="Fast GF(256) Cauchy MDS Block Erasure Codec in C++"
 HOMEPAGE="https://github.com/f4exb/cm256cc"

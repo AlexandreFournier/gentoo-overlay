@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="C++ library to encode/decode audio with AMBE3000"
 HOMEPAGE="https://github.com/f4exb/serialDV"
