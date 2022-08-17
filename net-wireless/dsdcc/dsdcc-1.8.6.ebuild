@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="Digital Speech Decoder (DSD) rewritten as a C++ library"
 HOMEPAGE="https://github.com/f4exb/dsdcc"
