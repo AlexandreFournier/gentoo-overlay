@@ -18,7 +18,6 @@ IUSE="aac alsa amr aptx aom codec2 ffmpeg g7221 gst gtk3 jack mqtt mpa opus open
 
 DEPEND="
 	=net-voip/re-${PV}
-	media-libs/rem
 	aac? ( media-libs/fdk-aac )
 	alsa? ( media-libs/alsa-lib )
 	amr? ( media-libs/opencore-amr )
