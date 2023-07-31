@@ -17,7 +17,7 @@ KEYWORDS="amd64"
 IUSE="aac alsa amr aptx aom codec2 ffmpeg g7221 gst gtk3 jack mqtt mpa opus openssl png portaudio pulseaudio pipewire sdl2 sndfile spandsp vpx x11"
 
 DEPEND="
-	net-voip/re
+	=net-voip/re-${PV}
 	media-libs/rem
 	aac? ( media-libs/fdk-aac )
 	alsa? ( media-libs/alsa-lib )
