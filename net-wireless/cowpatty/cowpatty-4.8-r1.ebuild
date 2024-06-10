@@ -1,9 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-
-inherit eutils
+EAPI=7
 
 DESCRIPTION="WLAN tools for bruteforcing 802.11 WPA/WPA2 keys"
 HOMEPAGE="http://www.willhackforsushi.com/?page_id=50"
