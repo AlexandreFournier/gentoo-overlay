@@ -16,8 +16,10 @@ KEYWORDS="amd64"
 # directfb,gio,gzrtp,opensles,v4l2,webrtc ?
 IUSE="aac alsa amr aptx aom codec2 ffmpeg g7221 gst gtk3 jack mqtt mpa opus openssl png portaudio pulseaudio pipewire sdl2 sndfile spandsp vpx x11"
 
+RE_PVF="$(ver_cut 1-2)*"
+
 DEPEND="
-	=net-voip/re-${PV}
+	=net-voip/re-${RE_PVF}
 	aac? ( media-libs/fdk-aac )
 	alsa? ( media-libs/alsa-lib )
 	amr? ( media-libs/opencore-amr )
