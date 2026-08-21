@@ -1,11 +1,11 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 MY_P="${PN}-source-${PV}"
 
-inherit edo
+inherit edo xdg
 
 DESCRIPTION="Graphical viewer for GNU ddrescue mapfiles"
 HOMEPAGE="https://sourceforge.net/projects/ddrescueview/"
@@ -19,7 +19,7 @@ KEYWORDS="~amd64"
 
 RESTRICT="strip"
 
-BDEPEND="dev-lang/lazarus"
+BDEPEND="dev-lang/lazarus[gtk]"
 
 # Pascal ignores CFLAGS and does its own stripping. Nothing else can be done about it.
 QA_FLAGS_IGNORED="usr/bin/ddrescueview"
@@ -27,13 +27,14 @@ QA_PRESTRIPPED="${QA_FLAGS_IGNORED}"
 
 src_compile() {
 	cd source || die
+	# the .lpi asks for gtk2, which Gentoo's lazarus no longer builds by default
 	edo lazbuild \
 		--lazarusdir=/usr/share/lazarus \
 		--primary-config-path="${HOME}" \
 		--skip-dependencies \
+		--widgetset=gtk3 \
 		--verbose \
 		ddrescueview.lpi
-	default
 }
 
 src_install() {
@@ -44,7 +45,5 @@ src_install() {
 	doins -r resources/linux/icons
 	doman resources/linux/man/man1/ddrescueview.1
 
-	dodoc changelog.txt
-	dodoc readme.txt
-	default
+	dodoc changelog.txt readme.txt
 }
