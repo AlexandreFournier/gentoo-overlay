@@ -1,4 +1,4 @@
-# Copyright 2023 Gentoo Authors
+# Copyright 2023-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="amd64"
 
 # directfb,gio,gzrtp,opensles,v4l2,webrtc ?
-IUSE="aac alsa amr aptx aom codec2 ffmpeg g7221 gst gtk3 jack mqtt mpa opus openssl png portaudio pulseaudio pipewire sdl2 sndfile spandsp vpx x11"
+IUSE="aac alsa amr aptx aom codec2 ffmpeg gst gtk3 jack mqtt mpa opus openssl png portaudio pulseaudio pipewire sdl2 sndfile spandsp vpx x11"
 
 RE_PVF="$(ver_cut 1-2)*"
 
@@ -27,7 +27,6 @@ DEPEND="
 	aom? ( media-libs/libaom )
 	codec2? ( media-libs/codec2 )
 	ffmpeg? ( media-video/ffmpeg )
-	g7221? ( media-libs/libg7221 )
 	gst? (
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0
@@ -45,7 +44,7 @@ DEPEND="
 	opus? ( media-libs/opus )
 	png? ( media-libs/libpng )
 	portaudio? ( media-libs/portaudio )
-	pulseaudio? ( media-sound/pulseaudio )
+	pulseaudio? ( media-libs/libpulse )
 	pipewire? ( media-video/pipewire )
 	sdl2? ( media-libs/libsdl2 )
 	sndfile? ( media-libs/libsndfile )
@@ -56,3 +55,4 @@ DEPEND="
 
 RDEPEND="${DEPEND}"
 
+BDEPEND="virtual/pkgconfig"
