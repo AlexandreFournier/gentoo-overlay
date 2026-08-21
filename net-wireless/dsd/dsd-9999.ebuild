@@ -1,27 +1,31 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 2022-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit cmake
+inherit cmake git-r3
 
 DESCRIPTION="Digital Speech Decoder"
 HOMEPAGE="https://github.com/szechyjs/dsd"
-LICENSE="bsd"
+EGIT_REPO_URI="https://github.com/szechyjs/dsd.git"
+
+LICENSE="ISC"
 SLOT="0"
+KEYWORDS=""
+IUSE="portaudio"
 
-if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="https://github.com/szechyjs/dsd.git"
-	KEYWORDS=""
-	inherit git-r3
-	DEPEND="=media-libs/mbelib-9999"
-else
-	SRC_URI="https://github.com/szechyjs/dsd/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-fi
-
-DEPEND="${DEPEND}
-	>=sci-libs/itpp-4.3.1
+RDEPEND="
 	media-libs/libsndfile
-	sci-libs/fftw:3.0
+	media-libs/mbelib
+	sci-libs/itpp
+	portaudio? ( media-libs/portaudio )
 "
+DEPEND="${RDEPEND}"
+
+src_prepare() {
+	# CMake 4 refuses a pre-3.5 minimum outright
+	sed -i 's/cmake_minimum_required(VERSION 2.8.11)/cmake_minimum_required(VERSION 3.10)/' \
+		CMakeLists.txt || die
+
+	cmake_src_prepare
+}
