@@ -1,26 +1,31 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
+inherit toolchain-funcs
+
 DESCRIPTION="Small tool to capture packets from wlan devices"
 HOMEPAGE="https://github.com/ZerBea/hcxdumptool"
-SRC_URI="https://github.com/ZerBea/hcxdumptool/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/ZerBea/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
-IUSE="gpio"
 
-DEPEND="dev-libs/openssl:="
-RDEPEND="${DEPEND}"
+RDEPEND="net-libs/libpcap"
+DEPEND="${RDEPEND}"
+
+DOCS=( README.md changelog )
 
 src_compile() {
-	emake $(usex gpio \
-		"GPIOSUPPORT=on" \
-		"GPIOSUPPORT=off")
+	emake CC="$(tc-getCC)"
 }
 
-src_install(){
+src_install() {
 	emake DESTDIR="${ED}" PREFIX="${EPREFIX}/usr" install
+
+	doman man/hcxdumptool.1
+	einstalldocs
+	dodoc -r docs
 }
