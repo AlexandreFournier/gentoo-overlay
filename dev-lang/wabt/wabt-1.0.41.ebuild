@@ -1,9 +1,9 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 2022-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{8..11} )
+PYTHON_COMPAT=( python3_{12..15} )
 
 inherit cmake python-any-r1
 
@@ -25,7 +25,7 @@ BDEPEND="
 
 PATCHES=(
 	# Disable tests depending on third_party/wasm-c-api/example/*.wasm
-	"${FILESDIR}/wabt-1.0.30-wasm-blob-tests.patch"
+	"${FILESDIR}/wabt-1.0.41-wasm-blob-tests.patch"
 )
 
 python_check_deps() {
@@ -33,14 +33,16 @@ python_check_deps() {
 }
 
 src_prepare() {
+	# Submodules kept: third_party/picosha2 third_party/simde
+	#                  third_party/testsuite third_party/wasm-c-api
+	# Dropped before cmake_src_prepare() so that its cmake_minimum_required
+	# QA scan does not trip over CMakeLists.txt files we never build.
+	rm -r third_party/gtest third_party/ply third_party/uvwasi \
+		third_party/simde/test || die
+
+	rm third_party/wasm-c-api/example/*.wasm fuzz-in/wasm/stuff.wasm || die
+
 	cmake_src_prepare
-
-	# Submodules kept: third_party/testsuite third_party/wasm-c-api
-	rm -r third_party/gtest third_party/ply third_party/uvwasi || die
-
-	rm third_party/wasm-c-api/example/*.wasm fuzz-in/wasm/stuff.wasm wasm2c/examples/fac/fac.wasm || die
-
-	sed -i 's;default_compiler =.*;default_compiler = os.getenv("CC", "cc");' test/run-spec-wasm2c.py || die
 }
 
 src_configure() {
